@@ -1,4 +1,4 @@
-import mergeWithDefaultOptions from './utils/mergeWithDefaultOptions';
+import mergeWithDefaultOptions, { type Options } from './utils/mergeWithDefaultOptions';
 import hiraganaToKatakana from './utils/hiraganaToKatakana';
 import isCharEnglishPunctuation from './utils/isCharEnglishPunctuation';
 import toKana from './toKana';
@@ -20,7 +20,7 @@ import isMixed from './isMixed';
  * toKatakana('wi', { useObsoleteKana: true })
  * // => 'ヰ'
  */
-function toKatakana(input = '', options = {}) {
+function toKatakana(input = '', options: Partial<Options> = {}) {
   const mergedOptions = mergeWithDefaultOptions(options);
   if (mergedOptions.passRomaji) {
     return hiraganaToKatakana(input);

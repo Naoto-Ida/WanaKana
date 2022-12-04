@@ -17,7 +17,7 @@ import isCharHiragana from './isCharHiragana';
  * // => "ヒラガナ is a type of kana"
  */
 function hiraganaToKatakana(input = '') {
-  const kata = [];
+  const kata: string[] = [];
   input.split('').forEach((char) => {
     // Short circuit to avoid incorrect codeshift for 'ー' and '・'
     if (isCharLongDash(char) || isCharSlashDot(char)) {

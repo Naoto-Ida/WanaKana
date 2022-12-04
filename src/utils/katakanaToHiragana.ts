@@ -3,8 +3,8 @@ import { KATAKANA_START, HIRAGANA_START } from '../constants';
 import isCharLongDash from './isCharLongDash';
 import isCharSlashDot from './isCharSlashDot';
 import isCharKatakana from './isCharKatakana';
-const isCharInitialLongDash = (char, index) => isCharLongDash(char) && index < 1;
-const isCharInnerLongDash = (char, index) => isCharLongDash(char) && index > 0;
+const isCharInitialLongDash = (char?: string, index: number) => isCharLongDash(char) && index < 1;
+const isCharInnerLongDash = (char?: string, index: number) => isCharLongDash(char) && index > 0;
 const isKanaAsSymbol = (char) => ['ヶ', 'ヵ'].includes(char);
 const LONG_VOWELS = {
   a: 'あ',
@@ -24,7 +24,7 @@ function katakanaToHiragana(
 
   return input
     .split('')
-    .reduce((hira, char, index) => {
+    .reduce((hira: string[], char: string, index) => {
       // Short circuit to avoid incorrect codeshift for 'ー' and '・'
       if (
         isCharSlashDot(char)

@@ -5,7 +5,7 @@
   },
   "source": {
     "include": ["src", "README.md"],
-    "includePattern": ".js$",
+    "includePattern": ".ts$",
     "excludePattern": "(node_modules|utils|__tests__)"
   },
   "plugins": ["plugins/markdown"],

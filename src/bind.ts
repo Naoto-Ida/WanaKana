@@ -17,7 +17,7 @@ const newId = () => {
  * @example
  * bind(document.querySelector('#myInput'));
  */
-function bind(element = {}, options = {}, debug = false) {
+function bind(element: HTMLElement, options = {}, debug = false) {
   if (!ELEMENTS.includes(element.nodeName)) {
     throw new Error(
       `Element provided to Wanakana bind() was not a valid input or textarea element.\n Received: (${JSON.stringify(

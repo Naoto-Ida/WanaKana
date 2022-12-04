@@ -7,13 +7,13 @@ import isCharHiragana from './utils/isCharHiragana';
 import isCharKatakana from './utils/isCharKatakana';
 import isCharJapanese from './utils/isCharJapanese';
 
-const isCharEnSpace = (x) => x === ' ';
-const isCharJaSpace = (x) => x === '　';
-const isCharJaNum = (x) => /[０-９]/.test(x);
-const isCharEnNum = (x) => /[0-9]/.test(x);
+const isCharEnSpace = (x: unknown) => x === ' ';
+const isCharJaSpace = (x): unknown => x === '　';
+const isCharJaNum = (x: unknown) => typeof x === 'string' && /[０-９]/.test(x);
+const isCharEnNum = (x: unknown) => typeof x === 'string' && /[0-9]/.test(x);
 
 export const TOKEN_TYPES = {
-  EN: 'en',
+  EN: 'en' as const,
   JA: 'ja',
   EN_NUM: 'englishNumeral',
   JA_NUM: 'japaneseNumeral',
@@ -23,20 +23,22 @@ export const TOKEN_TYPES = {
   HIRAGANA: 'hiragana',
   KATAKANA: 'katakana',
   SPACE: 'space',
-  OTHER: 'other',
-};
+  OTHER: 'other' as const,
+} as const;
+
+type TokenType = typeof TOKEN_TYPES;
 
 // prettier-ignore
-export function getType(input, compact = false) {
+export function getType(input, compact = false): TokenType {
   const {
     EN, JA, EN_NUM, JA_NUM, EN_PUNC, JA_PUNC, KANJI, HIRAGANA, KATAKANA, SPACE, OTHER,
   } = TOKEN_TYPES;
 
   if (compact) {
     switch (true) {
-      case isCharJaNum(input): return OTHER;
+      case isCharJaNum(input): return TOKEN_TYPES.OTHER;
       case isCharEnNum(input): return OTHER;
-      case isCharEnSpace(input): return EN;
+      case isCharEnSpace(input): return TOKEN_TYPES.EN;
       case isCharEnglishPunctuation(input): return OTHER;
       case isCharJaSpace(input): return JA;
       case isCharJapanesePunctuation(input): return OTHER;
@@ -122,7 +124,7 @@ export function getType(input, compact = false) {
  *  { type: 'other', value: 'لنذهب' },
  *]
  */
-function tokenize(input, { compact = false, detailed = false } = {}) {
+function tokenize(input?: string, { compact = false, detailed = false } = {}) {
   if (input == null || isEmpty(input)) {
     return [];
   }

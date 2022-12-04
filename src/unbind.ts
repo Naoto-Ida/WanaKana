@@ -5,7 +5,7 @@ import { removeDebugListeners } from './utils/logInputEvents';
  * Unbinds eventListener from input field
  * @param  {HTMLElement} element textarea, input
  */
-export function unbind(element, debug = false) {
+export function unbind(element: HTMLElement, debug = false) {
   const listeners = findListeners(element);
   if (listeners == null) {
     throw new Error(

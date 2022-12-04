@@ -1,6 +1,6 @@
 import typeOf from './typeOf';
 
-export function applyMapping(string, mapping, convertEnding) {
+export function applyMapping(str: string, mapping, convertEnding) {
   const root = mapping;
 
   function nextSubtree(tree, nextChar) {
@@ -12,7 +12,7 @@ export function applyMapping(string, mapping, convertEnding) {
     return Object.assign({ '': tree[''] + nextChar }, tree[nextChar]);
   }
 
-  function newChunk(remaining, currentCursor) {
+  function newChunk(remaining: string, currentCursor: number) {
     // start parsing a new chunk
     const firstChar = remaining.charAt(0);
 
@@ -24,7 +24,7 @@ export function applyMapping(string, mapping, convertEnding) {
     );
   }
 
-  function parse(tree, remaining, lastCursor, currentCursor) {
+  function parse(tree, remaining: string, lastCursor: number, currentCursor: number) {
     if (!remaining) {
       if (convertEnding || Object.keys(tree).length === 1) {
         // nothing more to consume, just commit the last chunk and return it
@@ -53,7 +53,7 @@ export function applyMapping(string, mapping, convertEnding) {
     return parse(subtree, remaining.slice(1), lastCursor, currentCursor + 1);
   }
 
-  return newChunk(string, 0);
+  return newChunk(str, 0);
 }
 
 // transform the tree, so that for example hepburnTree['ゔ']['ぁ'][''] === 'va'

@@ -1,7 +1,7 @@
 import { transform, getSubTreeOf } from './kanaMapping';
 import { ROMANIZATIONS } from '../constants';
 
-let kanaToHepburnMap = null;
+let kanaToHepburnMap: object | null;
 
 /* eslint-disable */
 // prettier-ignore
@@ -129,7 +129,7 @@ export function getKanaToRomajiTree(romanization) {
   }
 }
 
-function createKanaToHepburnMap() {
+function createKanaToHepburnMap(): object {
   const romajiTree = transform(BASIC_ROMAJI);
 
   const subtreeOf = (string) => getSubTreeOf(romajiTree, string);

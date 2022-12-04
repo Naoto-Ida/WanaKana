@@ -17,7 +17,7 @@
  * typeOf(new Map()); // 'map'
  * typeOf(new Set()); // 'map'
  */
-function typeOf(value) {
+function typeOf(value: unknown): string {
   if (value === null) {
     return 'null';
   }

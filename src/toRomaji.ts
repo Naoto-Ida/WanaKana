@@ -1,7 +1,7 @@
 import memoizeOne from 'memoize-one';
 import { dequal } from 'dequal';
 
-import mergeWithDefaultOptions from './utils/mergeWithDefaultOptions';
+import mergeWithDefaultOptions, { type Options } from './utils/mergeWithDefaultOptions';
 import katakanaToHiragana from './utils/katakanaToHiragana';
 import isKatakana from './isKatakana';
 import { getKanaToRomajiTree } from './utils/kanaToRomajiMap';
@@ -37,7 +37,7 @@ export const createKanaToRomajiMap = memoizeOne(
  * toRomaji('つじぎり', { customRomajiMapping: { じ: 'zi', つ: 'tu', り: 'li' } });
  * // => 'tuzigili'
  */
-export function toRomaji(input = '', options = {}, map) {
+export function toRomaji(input = '', options: Partial<Options> = {}, map?: unknown) {
   const config = mergeWithDefaultOptions(options);
 
   if (!map) {

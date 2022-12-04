@@ -2,7 +2,7 @@ import isJapanese from '../isJapanese';
 import toKana, { createRomajiToKanaMap } from '../toKana';
 import mergeWithDefaultOptions from './mergeWithDefaultOptions';
 
-let LISTENERS = [];
+let LISTENERS: {id: string, inputHandler: unknown, compositionHandler: unknown}[] = [];
 /**
  * Automagically replaces input values with converted text to kana
  * @param  {defaultOptions} [options] user config overrides, default conversion is toKana()

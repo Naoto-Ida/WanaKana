@@ -23,13 +23,13 @@ import isCharJapanese from './utils/isCharJapanese';
  * isJapanese('≪偽括弧≫', /[≪≫]/);
  * // => true
  */
-function isJapanese(input = '', allowed) {
+function isJapanese(input = '', allowed?: RegExp) {
   const augmented = typeOf(allowed) === 'regexp';
   return isEmpty(input)
     ? false
     : [...input].every((char) => {
       const isJa = isCharJapanese(char);
-      return !augmented ? isJa : isJa || allowed.test(char);
+      return !augmented ? isJa : isJa || allowed!.test(char);
     });
 }
 

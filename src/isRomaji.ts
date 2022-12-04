@@ -21,13 +21,13 @@ import isCharRomaji from './utils/isCharRomaji';
  * isRomaji('a！b&cーd', /[！ー]/)
  * // => true
  */
-function isRomaji(input = '', allowed) {
+function isRomaji(input = '', allowed?: RegExp) {
   const augmented = typeOf(allowed) === 'regexp';
   return isEmpty(input)
     ? false
     : [...input].every((char) => {
       const isRoma = isCharRomaji(char);
-      return !augmented ? isRoma : isRoma || allowed.test(char);
+      return !augmented ? isRoma : isRoma || allowed!.test(char);
     });
 }
 

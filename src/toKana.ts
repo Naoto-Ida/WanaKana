@@ -2,7 +2,7 @@ import memoizeOne from 'memoize-one';
 import { dequal } from 'dequal';
 
 import { TO_KANA_METHODS } from './constants';
-import mergeWithDefaultOptions from './utils/mergeWithDefaultOptions';
+import mergeWithDefaultOptions, { type Options } from './utils/mergeWithDefaultOptions';
 import {
   getRomajiToKanaTree,
   IME_MODE_MAP,
@@ -50,7 +50,7 @@ export const createRomajiToKanaMap = memoizeOne(
  * toKana('wanakana', { customKanaMapping: { na: 'に', ka: 'bana' } });
  * // => 'わにbanaに'
  */
-export function toKana(input = '', options = {}, map) {
+export function toKana(input = '', options: Partial<Options> = {}, map?: any) {
   let config;
   if (!map) {
     config = mergeWithDefaultOptions(options);
@@ -93,7 +93,7 @@ export function toKana(input = '', options = {}, map) {
  * splitIntoConvertedKana('buttsuuji')
  * // => [[0, 2, 'ぶ'], [2, 6, 'っつ'], [6, 7, 'う'], [7, 9, 'じ']]
  */
-export function splitIntoConvertedKana(input = '', options = {}, map) {
+export function splitIntoConvertedKana(input = '', options: Partial<Options> = {}, map): [start: number, end: number, kana: string][] {
   const { IMEMode, useObsoleteKana, customKanaMapping } = options;
 
   if (!map) {

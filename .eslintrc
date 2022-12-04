@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb-base",
+  "extends": ["airbnb-base", "plugin:@typescript-eslint/recommended"],
   "env": {
     "browser": true,
     "node": true,
@@ -7,7 +7,8 @@
     "es6": true,
     "cypress/globals": true
   },
-  "plugins": ["import", "cypress"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["import", "cypress", "@typescript-eslint"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
